@@ -13,6 +13,6 @@ export class NavbarComponent implements OnInit {
 
   openModal($event: Event) {
     $event.preventDefault()
-    this.modal.toggleModalVisibility()
+    this.modal.toggleModalVisibility('auth')
   }
 }
