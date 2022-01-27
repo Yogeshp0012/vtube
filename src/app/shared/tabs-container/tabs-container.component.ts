@@ -3,6 +3,7 @@ import {
   OnInit,
   ContentChildren,
   AfterContentInit,
+  QueryList,
 } from '@angular/core'
 import { TabComponent } from '../tab/tab.component'
 
@@ -12,8 +13,21 @@ import { TabComponent } from '../tab/tab.component'
   styleUrls: ['./tabs-container.component.scss'],
 })
 export class TabsContainerComponent implements AfterContentInit {
-  @ContentChildren(TabComponent) tabs = {}
+  @ContentChildren(TabComponent) tabs?: QueryList<TabComponent>
 
   constructor() {}
-  ngAfterContentInit(): void {}
+  ngAfterContentInit(): void {
+    const activeTabs = this.tabs?.filter((tab) => tab.active)
+    if (!activeTabs || activeTabs.length === 0) {
+      this.selectTab(this.tabs!.first)
+    }
+  }
+  selectTab(tab: TabComponent) {
+    this.tabs?.forEach((tab) => {
+      tab.active = false
+    })
+    tab.active = true
+
+    return false
+  }
 }
