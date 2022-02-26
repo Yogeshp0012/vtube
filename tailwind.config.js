@@ -1,7 +1,20 @@
 module.exports = {
-  content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
+  purge: {
+    content: [
+      './src/**/*.{html,ts}'
+    ]
+  },
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  plugins: [],
+  variants: {
+    extend: {
+      opacity: ['disabled'],
+      backgroundColor: ['disabled']
+    },
+  },
+  plugins: [
+    require("@tailwindcss/aspect-ratio")
+  ],
 }
